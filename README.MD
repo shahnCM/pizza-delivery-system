@@ -19,7 +19,7 @@ And PizzaMakingJob is qued in 'long-process' queue as it takes 10 seconds for ea
 
 So when a job is completed pizza_status in database is changed to 'Completed'. And our Observer now sends that associated user a notification that the Pizza is now Complete.
 
-### Desings Which are Implemented
+### Designs Which are Implemented
 
 * Larave's Observer For Model.
 * Event Listener
