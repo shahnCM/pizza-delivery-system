@@ -39,5 +39,6 @@ So when a job is completed pizza_status in database is changed to 'Completed'. A
 * Once everything is installed run `php artisan serve`
 * Open another CLI in project dir and run `php artisan queue:work --queue=notification,long-process`
 * Now go to browser and enter `http://localhost:8000/api/initiate-system`
+* Refresh several times, and look for MailHog notifications.
 
 
