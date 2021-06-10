@@ -14,14 +14,14 @@ After that we fire an event to start processing the Pizza Order and set order st
 
 So observer takes action when a new recored is inserted and when a record is updated.
 
-Our Notifications are qued in 'notification' queue.
-And PizzaMakingJob is qued in 'long-process' queue as it takes 10 seconds for each pizza to be made.
+Our Notifications are queued in 'notification' queue.
+And PizzaMakingJob is queued in 'long-process' queue as it takes 10 seconds for each pizza to be made.
 
 So when a job is completed pizza_status in database is changed to 'Completed'. And our Observer now sends that associated user a notification that the Pizza is now Complete.
 
 ### Designs Which are Implemented
 
-* Larave's Observer For Model.
+* Laravel's Observer For Model.
 * Event Listener
 * Jobs 
 * Notifications
