@@ -10,7 +10,7 @@ Now when a first pizza order record is inserted in database, the pizza_status is
 
 Our Model Observer (Observer for Pizza Model) sends that user a notification that 'Order is taken and Status Pending'
 
-After that we fire an event to start processing the Pizza Order and set order status to 'Processing', So observer again sends the associated user that the 'Order is now at Processing State'. As Event is fired / triggered our Listener than initiate / dispatch a Job for making pizza. And the job is qued.
+After that we fire an event to start processing the Pizza Order and set order status to 'Processing', So observer again sends the associated user that the 'Order is now at Processing State'. As Event is fired / triggered our Listener than initiate / dispatch a Job for making pizza. And the job is queued.
 
 So observer takes action when a new recored is inserted and when a record is updated.
 
