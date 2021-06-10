@@ -6,7 +6,7 @@ First it checks if any user exists or not. If there exits no user than it create
 
 So once we have our User, Pizza Order associated with that user will be created.
 
-Now when a first pizza order record is inserted in database, the pizza_status is set to 'Pendin'. At this point,
+Now when a first pizza order record is inserted in database, the pizza_status is set to 'Pending'. At this point,
 
 Our Model Observer (Observer for Pizza Model) sends that user a notification that 'Order is taken and Status Pending'
 
@@ -34,8 +34,9 @@ So when a job is completed pizza_status in database is changed to 'Completed'. A
 * Enable required extension in php.ini for RabbitMq if you are using Xampp (uncomment ;extension=amqp)
 * Install MailHog
 * Download or Clone the project
-* In project dir, run `composer install`
 * All Credentials are given in `env.exm` file, rename it to `.env`
+* In project dir, run `composer install`
+* Now run `php artisan migrate`
 * Once everything is installed run `php artisan serve`
 * Open another CLI in project dir and run `php artisan queue:work --queue=notification,long-process`
 * Now go to browser and enter `http://localhost:8000/api/initiate-system`
