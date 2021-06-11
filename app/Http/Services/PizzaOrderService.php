@@ -28,58 +28,27 @@ class PizzaOrderService
 
         }
 
-        try {
+        DB::connection('mysql')->beginTransaction();
 
-            DB::connection('mysql')->beginTransaction();
+        try {
+        
             $pizza = (new Pizza())->create([
                 'user_id' => $user->id,
                 'pizza_status' => PIZZA::PIZZA_PENDING
             ]);
+
+            DB::connection('mysql')->commit();
+            $this->startPizzaProcessing($pizza);
+            self::$success = true;
         
          } catch (\Exception $e) {
             
             DB::connection('mysql')->rollBack();
             self::$success = false;
 
-        } finally {
-
-            DB::connection('mysql')->commit();
-            self::$success = true;
-
-        }
-
-        $this->startPizzaProcessing($pizza);
-
-        return self::$success;
-    }
-
-    /**
-     * $pizzaStatus will be passed in here
-     * We pass Pizza Model's constant from the handle method of Job
-     */
-    public function updatePizzaStatus($pizza, $pizzaStatus)
-    {   
-        try {
-
-            DB::connection('mysql')->beginTransaction();
-            $pizza->update([
-                'pizza_status' => $pizzaStatus
-            ]);
-        
-        } catch (\Exception $e) {
-
-            DB::connection('mysql')->rollBack();
-            self::$success = false;
-
-        } finally {
-
-            DB::connection('mysql')->commit();
-            self::$success = true;
-        
         }
 
         return self::$success;
-
     }
 
     public function startPizzaProcessing($pizza)
@@ -101,4 +70,32 @@ class PizzaOrderService
 
         return self::$success;
     }
+
+    /**
+     * $pizzaStatus will be passed in here
+     * We pass Pizza Model's constant from the handle method of Job
+     */
+    public function updatePizzaStatus($pizza, $pizzaStatus)
+    {   
+        DB::connection('mysql')->beginTransaction();
+
+        try {
+
+            $pizza->update([
+                'pizza_status' => $pizzaStatus
+            ]);
+
+            DB::connection('mysql')->commit();
+            self::$success = true;
+        
+        } catch (\Exception $e) {
+
+            DB::connection('mysql')->rollBack();
+            self::$success = false;
+
+        }
+
+        return self::$success;
+
+    }    
 }
