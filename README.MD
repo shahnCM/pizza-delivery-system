@@ -27,15 +27,18 @@ So when a job is completed pizza_status in database is changed to 'Completed'. A
 * Notifications
 * Multiple Queues for Notification & Long/Heavy Job.
 * RabbitMq
+* Redis
 
 ### How to Install & Run
 
 * Install RabbitMq (Follow Official Documentation and do all necessary things and login to rabbitmq admin panel from browser)
+* Install Redis in your system & predis as laravel's redis-client
 * Enable required extension in php.ini for RabbitMq if you are using Xampp (uncomment ;extension=amqp)
 * Install MailHog
 * Download or Clone the project
 * All Credentials are given in `env.exm` file, rename it to `.env`
-* In project dir, run `composer install`
+* In project dir, run `composer install` & `php artisan horizon:install`
+* Set 'horizon' as RABBITMQ_WORKER & predis as REDIS_CLIENT in .env.exm if you want to use horizon and redis
 * Now run `php artisan migrate`
 * Once everything is installed run `php artisan serve`
 * Open another CLI in project dir and run `php artisan queue:work --queue=notification,long-process`
