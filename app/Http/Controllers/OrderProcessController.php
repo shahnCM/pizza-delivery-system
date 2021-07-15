@@ -9,7 +9,9 @@ class OrderProcessController extends Controller
 {
     public function initiateProcessing(PizzaOrderService $pizzaOrderService) 
     {
-        $pizzaOrderService->takePizzaOrder() 
+        for($i = 0; $i < 500; $i++) 
+        {
+            $pizzaOrderService->takePizzaOrder() 
             ? $responseData = [
                 'msg' => 'We have recieved your order. You will recieve notification via email.',
                 'status' => 200
@@ -18,9 +20,11 @@ class OrderProcessController extends Controller
                 'msg' => 'Something wen wrong, Internal Server Error.',
                 'status' => 500
             ];
+        }
 
         return 
-            response(
+            response()
+            ->json(
                 $responseData['msg'], 
                 $responseData['status'])
             ->header(

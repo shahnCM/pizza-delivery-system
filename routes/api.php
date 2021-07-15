@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderProcessController; 
+use App\Http\Controllers\TestSystemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/test', function() {
-    dd("server running");
-});
+Route::get('/test', [TestSystemController::class, 'testResponse']);
 
 Route::get('/initiate-system', [OrderProcessController::class, 'initiateProcessing']);
+
+Route::get('/fry-system', [TestSystemController::class, 'startFrying']);
